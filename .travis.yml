@@ -13,4 +13,3 @@ notifications:
       - mz2325@nyu.edu
       - yl5929@nyu.edu
     on_success: always
-    on_failure: always  
