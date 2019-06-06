@@ -31,6 +31,6 @@ void Weather::set_rating(int new_rating)
 
 ostream& operator<<(ostream& os, const Weather& w)
 {
-    os << w.station_nm << ": rating " << w.get_rating() << " Location: " << w.my_loc;
+    os << w.get_name() << ": rating " << w.get_rating() << " Location: " << w.my_loc;
     return os;
 }
