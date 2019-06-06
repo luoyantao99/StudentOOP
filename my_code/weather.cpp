@@ -34,5 +34,3 @@ ostream& operator<<(ostream& os, const Weather& w)
     os << w.station_nm << ": rating " << w.get_rating() << " Location: " << w.my_loc;
     return os;
 }
-
-
