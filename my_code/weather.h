@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "date.hpp"
 
 struct GPS {
     double latitude;
@@ -14,15 +15,7 @@ struct GPS {
 std::ostream& operator<<(std::ostream& os, const GPS& gps);
 
 
-class Date {
-    friend std::ostream& operator<<(std::ostream& os, const Date& date);
-public:
-    Date(int d, int m, int y);
-private:
-    int day;
-    int month;
-    int year;
-};
+
 
 
 class WReading {
