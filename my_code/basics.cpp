@@ -26,7 +26,7 @@ void inc_pass_ref(int& j) {
  * Use `push_back()` to fill the vector.
  * */
 void fill_vector(vector<int>& v, int n) {
-    for (int i=0; i<n; i++){
+    for (int i=1; i<n+1; i++){
         v.push_back(i);
     }
 }
