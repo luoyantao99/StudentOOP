@@ -8,6 +8,35 @@ using namespace std;
 const double F_TO_C = 5 / 9;
 const double C_TO_F = 9 / 5;
 
+
+
+// Output
+ostream& operator<<(ostream& os, const WReading& wr){
+    os << "Date: " << wr.date << "; Humidity: " << wr.humidity << "; Temperature: " << wr.temperature << "; Windspeed: " << wr.windspeed;
+    return os;
+}
+
+ostream& operator<<(std::ostream& os, const GPS& gps)
+{
+    os << "Latitude: " << gps.latitude << "; Longitude: " << gps.longitude;
+    return os;
+}
+
+ostream& operator<<(ostream& os, const Weather& w)
+{
+    os << w.get_name() << ": rating " << w.get_rating() << " Location: " << w.my_loc << endl;
+    for (WReading wr : w.wreadings)
+    {
+        os << "   " << wr << endl;
+    }
+    return os;
+}
+
+
+
+
+
+// Image class
 Image::Image(int w, int h, std::string flnm) : width(w), height(h)
 {
     filename = flnm;
@@ -61,39 +90,35 @@ int Image::image_sz() {
 void Image::copy_fields(const Image& img2) {
 }
 
-
 /*
  * Setting `display() = 0` here makes this an abstract
  * class that can't be implemented.
  * */
 string Image::display(std::string s) {
-    return "Displaying image " + s;
+    cout << "Displaying image " << s << endl;
+    return s;
 }
 
 
-
-double WReading::get_tempF() {
-    return (temperature * C_TO_F) + 32;
-}
-
-
-/*
- * Output WReading
- **/
-ostream& operator<<(ostream& os, const WReading& wr){
-    os << "Date: " << wr.date << "; Humidity: " << wr.humidity << "; Temperature: " << wr.temperature << "; Windspeed: " << wr.windspeed;
-    return os;
-}
-
-
-/*
- * Output GPS
- **/
-ostream& operator<<(std::ostream& os, const GPS& gps)
+// polymorphism
+string Png::display(std::string s)
 {
-    os << "Latitude: " << gps.latitude << "; Longitude: " << gps.longitude;
-    return os;
+    cout << "Displaying png " << s << endl;
+    return s;
 }
+
+string Jpeg::display(std::string s)
+{
+    cout << "Displaying jpg " << s << endl;
+    return s;
+}
+
+string Gif::display(std::string s)
+{
+    cout << "Displaying gif " << s << endl;
+    return s;
+}
+
 
 
 /*
@@ -122,12 +147,22 @@ void Weather::add_reading(WReading wr)
     wreadings.push_back(wr);
 }
 
-ostream& operator<<(ostream& os, const Weather& w)
+
+
+double WReading::get_tempF() {
+    return (temperature * C_TO_F) + 32;
+}
+
+void WReading::display_image() const
 {
-    os << w.get_name() << ": rating " << w.get_rating() << " Location: " << w.my_loc << endl;
-    for (WReading wr : w.wreadings)
+    if(!image) cout << "no image display" << endl;
+    else image->display("from weather reading");
+}
+
+void Weather::display_images() const
+{
+    for (WReading wr : wreadings)
     {
-        os << "   " << wr << endl;
+        wr.display_image();
     }
-    return os;
 }
