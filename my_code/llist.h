@@ -23,12 +23,31 @@ Node* last(Node* head);
 void add_at_end(Node*& head, int d);
 void add_at_front(Node*& head, int d);
 
+
 /*
- * These are coming:
- bool del_head(Node*& head);
- bool del_tail(Node** prev_next);
- Node* duplicate(Node* head);
- Node* reverse(Node* curr, Node* prev=nullptr);
- */
+ * Delete the first node and attach head to the 2nd node:
+ * */
+bool del_head(Node*& head);
+
+/*
+ * Delete the last node and set prev->next to nullptr:
+ * */
+bool del_tail(Node*& head);
+
+/*
+ * Reverse the list: return a brand new list with everything reversed.
+ * */
+Node* reverse(Node* curr, Node* new_next=nullptr);
+
+/*
+ * Duplicate the entire list -- you must not share memory!
+ * */
+Node* duplicate(Node* head);
+
+/*
+ * Join two lists: tack list 2 onto the end of list 1:
+ * Use existing memory.
+ * */
+Node* join(Node*& list1, Node* list2);
 
 #endif

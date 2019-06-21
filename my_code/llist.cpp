@@ -46,9 +46,50 @@ void add_at_front(Node*& head, int d) {
  * */
 Node* last(Node* head) {
     if (!head) return nullptr;
-    while (head->next != nullptr)
-    {
-        head = head->next;
+    else if (!head->next) return head;
+    else return last(head->next);
+}
+
+
+bool del_head(Node*& head) {
+    if (!head) return false;
+    Node* temp = head;
+    head = head->next;
+    delete temp;
+    return true;
+}
+
+
+bool del_tail(Node*& curr) {
+    if (!curr) return false;
+    else {
+        if (curr->next == nullptr) {
+            delete curr;
+            curr = nullptr;
+            return true;
+        }
+        else {
+            return del_tail(curr->next);
+        }
     }
-    return head;
+}
+
+
+Node* reverse(Node* curr, Node* new_next) {
+    if (!curr) return new_next;
+    else {
+        return reverse(curr->next, new Node(curr->data, new_next));
+    }
+}
+
+
+Node* duplicate(Node* head) {
+    if (!head) return nullptr;
+    else return new Node(head->data, (duplicate(head->next)));
+}
+
+
+Node* join(Node*& list1, Node* list2) {
+    last(list1)->next = list2;
+    return list1;
 }
