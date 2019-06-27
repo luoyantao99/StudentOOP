@@ -1,6 +1,7 @@
 #include <iostream>
 #include <istream>
 #include <iomanip>
+#include <cmath>
 #include "complex.h"
 
 using namespace std;
@@ -68,9 +69,8 @@ double Complex::get_imag() const {
 }
 
 Complex Complex::operator*(const int i) {
-    real *= i;
-    imag *= i;
-    return *this;
+    Complex temp(real*i,imag*i);
+    return temp;
 }
 
 Complex& Complex::operator+=(const Complex& c){
@@ -88,7 +88,7 @@ Complex& Complex::operator-=(const Complex& c){
 
 
 bool operator== (const Complex& c1, const Complex& c2){
-    return c1.get_imag() == c2.get_imag() && c1.get_real() == c2.get_real();
+    return (abs(c1.get_real() - c2.get_real())<0.00001 && abs(c1.get_imag() - c2.get_imag())<0.00001);
 }
 
 bool operator!= (const Complex& c1, const Complex& c2){

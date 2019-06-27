@@ -4,16 +4,23 @@
 using namespace std;
 
 void print_vector(const MyVec& v) {
-    for (int i = 0; i < v.size(); i++){
-        cout << v[i] << " ";
-    }
+    for (int i : v) cout << i << " ";
+    cout << endl;
 }
 
 
-MyVec::MyVec() {
-    sz = 0;
+MyVec::MyVec() : sz(0) {
     capacity = DEF_CAPACITY;
     data = new int[DEF_CAPACITY];
+}
+
+MyVec::MyVec(int sz, int val) : sz(sz) {
+    capacity = sz;
+    data = new int[capacity];
+    for (int i=0; i<sz; i++)
+    {
+        data[i] = val;
+    }
 }
 
 MyVec::MyVec(const MyVec& v2) {
@@ -49,6 +56,16 @@ MyVec& MyVec::operator=(const MyVec& v2) {
     }
     return *this;
 }
+
+
+MyVec::Iterator MyVec::begin() const {
+    return MyVec::Iterator(data);
+}
+
+MyVec::Iterator MyVec::end() const {
+    return MyVec::Iterator(data+sz);
+}
+
 
 
 /*
@@ -94,4 +111,14 @@ int MyVec::operator[](int i) const {
  * */
 int& MyVec::operator[](int i) {
     return data[i];
+}
+
+
+void MyVec::copy(const MyVec& v2) {
+    sz = v2.sz;
+    capacity = v2.capacity;
+    data = new int[capacity];
+    for (int i = 0; i < sz; i++) {
+        data[i] = v2.data[i];
+    }
 }

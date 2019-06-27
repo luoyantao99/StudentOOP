@@ -11,12 +11,12 @@ int main() {
     cout << "Input a complex number:\n";
     Complex c1{12, 13};
 
-    cin >> c1;
-    if(!cin)
-    {
-        cerr << "Bad input format\n";
-        exit(1);
-    }
+//    cin >> c1;
+//    if(!cin)
+//    {
+//        cerr << "Bad input format\n";
+//        exit(1);
+//    }
     if(my_DEBUG)
     {
         cout << "c1 = " << c1 << endl;
@@ -36,6 +36,9 @@ int main() {
     assert(c3.get_real() > 43.2);
     // see if `Complex` subtraction works:
     c3 -= c2;
+    
+    cout << endl;
+    cout << "c3: " << c3 << " c1: " << c1 << endl;
     assert(c3 == c1);
     
     Complex c4 = Complex();
